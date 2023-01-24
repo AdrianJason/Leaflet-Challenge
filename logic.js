@@ -91,7 +91,7 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
-}
+
 
 // Creating legend
 var legend = L.control({position: "bottomright"}); 
@@ -104,15 +104,18 @@ legend.onAdd = function() {
   var legendInfo = "<h1>Depth of Earthquake</br> (per km) </h1>" +
   "<div class=\"labels\">" +
   "<div class = \"min\">" + limits[0] + "</div>" +
-  "<div class=\"max\">" + limits[limits.lenght - 1] + "</div>" +
+  "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
   "</div>";
   
-  div.intterHTML = legendInfo; 
+  div.innerHTML = legendInfo; 
 
-  limits.onEach(function(limit, index){
+  limits.forEach(function(limit, index){
     labels.push("<li style=\'background-color: " + colors[index] + "\"></li>"); 
   }); 
 
-  div.innterHTML += "<ul>" + labels.join("") + "</ul>"; 
-
+  div.innerHTML += "<ul>" + labels.join("") + "</ul>"; 
+  return div;
 }; 
+//if(myMap)
+legend.addTo(myMap); 
+}
