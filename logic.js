@@ -36,7 +36,16 @@ function createFeatures(earthquakeData) {
   var earthquakes = L.geoJSON(earthquakeData, {
     onEachFeature: onEachFeature,
     pointToLayer: function (feature, latlng){
-      return L.circleMarker(latlng);
+      return L.circleMarker(latlng,
+        {
+          opacity: 1,
+          fillOpacity: 1,
+          fillColor: getColor(feature.geometry.coordinates[2]),
+          color: "#000000",
+          radius: feature.properties.mag*8,
+          stroke: true,
+          weight: 0.5
+        });
     }
   });
 
