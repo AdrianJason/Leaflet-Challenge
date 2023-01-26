@@ -98,24 +98,13 @@ var legend = L.control({position: "bottomright"});
 legend.onAdd = function() {
   var div = L.DomUtil.create("div", "info legend"); 
     limits = [0,10,20,30,40,50,60,70,80,90]; 
-  var colors= ["#577590", "#4D908E", "#43AA8B", "#90BE6D", "#C5C35E", "#F9C74F", "#F8961E", "#F3722C", "#F65A38", "#F94144"]
-  var labels = [];
-
-  var legendInfo = "<h1>Depth of Earthquake</br> (per km) </h1>" +
-  "<div class=\"labels\">" +
-  "<div class = \"min\">" + limits[0] + "</div>" +
-  "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-  "</div>";
+    for (i = 0; i < limits.length; i++) {
+      div.innerHTML += '<i style="background:' + getColor(limits[i]) + '"></i>' + limits[i] + (limits[i+1] ? '&ndash;' + limits[i+1] : '+') + '<br>';
+    }
   
-  div.innerHTML = legendInfo; 
+    return div;
+  };
 
-  limits.forEach(function(limit, index){
-    labels.push("<li style=\'background-color: " + colors[index] + "\"></li>"); 
-  }); 
-
-  div.innerHTML += "<ul>" + labels.join("") + "</ul>"; 
-  return div;
-}; 
 //if(myMap)
 legend.addTo(myMap); 
 }
